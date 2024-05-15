@@ -1,17 +1,18 @@
 package Jframe;
 
+import Fisica.Doppler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Fisica.*;
 
 public class Visual extends JFrame {
 
     //atributos
     private JPanel menu;
-    private JButton doppler;
-    private JButton historico;
+    private JButton botaoDoppler;
+    private JButton botaoHistorico;
     private JLabel textoMenu;
 
     //atributos do metodo calcular freq
@@ -39,17 +40,17 @@ public class Visual extends JFrame {
         textoMenu.setVisible(true);
 
         //Botões
-        doppler = new JButton("Simulador de Doppler");
-        historico = new JButton("Histórico");
+        botaoDoppler = new JButton("Simulador de Doppler");
+        botaoHistorico = new JButton("Histórico");
 
         //Add os atributos ao menu
 
         menu.add(textoMenu);
-        menu.add(doppler);
-        menu.add(historico);
+        menu.add(botaoDoppler);
+        menu.add(botaoHistorico);
 
         //botão do Doppler
-        doppler.addActionListener(new ActionListener() {
+        botaoDoppler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog simulacaoDoppler = new JDialog(Visual.this, "Simulador de Doppler");
@@ -129,7 +130,7 @@ public class Visual extends JFrame {
         });
 
         //botão do histórico
-        historico.addActionListener(new ActionListener() {
+        botaoHistorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame historico = new JFrame("Simulador de Doppler");

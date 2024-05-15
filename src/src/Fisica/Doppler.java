@@ -1,6 +1,5 @@
 package Fisica;
 
-import java.util.Scanner;
 public class Doppler {
     private double fPercebida;
     private  double fReal;

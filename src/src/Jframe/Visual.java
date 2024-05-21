@@ -15,7 +15,7 @@ public class Visual extends JFrame {
     private JButton botaoHistorico;
     private JLabel textoMenu;
 
-    //atributos do metodo calcular freq
+    //atributos do metodo (calcular) freq
     private double fPercebida;
     private  double fReal;
     private double vSom;

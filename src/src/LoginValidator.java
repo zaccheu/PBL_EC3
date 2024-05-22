@@ -7,13 +7,11 @@ import java.sql.SQLException;
 public class LoginValidator {
 
     private static final String URL = "jdbc:sqlserver://192.168.1.111:1433;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
-    private static final String USER = "usuario";
-    private static final String PASSWORD = "senha";
 
     public boolean validateLogin(String email, String senha) {
-        String sql = "SELECT * FROM Usuarios WHERE email = ? AND senha = ?";
+        String sql = "SELECT * FROM Usuarios WHERE email = 'zaccheuzinho@gmail.com' AND senha = 'AiTigrao'";
 
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, email);
@@ -30,8 +28,8 @@ public class LoginValidator {
 
     public static void main(String[] args) {
         LoginValidator validator = new LoginValidator();
-        String email = "usuario@example.com";
-        String senha = "senha123";
+        String email = "zaccheuzinho@gmail.com";
+        String senha = "AiTigrao";
 
         if (validator.validateLogin(email, senha)) {
             System.out.println("Login válido!");

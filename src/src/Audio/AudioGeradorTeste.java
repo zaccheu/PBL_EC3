@@ -1,18 +1,16 @@
 package Audio;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.*;
 
-public class AudioGerador {
+public class AudioGeradorTeste {
 
-    public static void main(String[] args) throws Exception {
 
+
+    public void gerarAudio(double frqEmi, double disIni, double velFont) throws LineUnavailableException {
         // Parâmetros do efeito Doppler
-        double freqFonte = 500; // Frequência da sirene da ambulância em Hz
-        double distanciaIncial_Obs = 60; // Distância inicial em metros
-        double veloFonte = 30; // Velocidade da ambulância em m/s (positiva se se aproximando do observador)
+        double freqFonte = frqEmi; // Frequência da sirene da ambulância em Hz
+        double distanciaIncial_Obs = disIni; // Distância inicial em metros
+        double veloFonte = velFont; // Velocidade da ambulância em m/s (positiva se se aproximando do observador)
         double veloSom = 343; // Velocidade do som no ar em m/s
 
         // Criando var para a o valor da formuala da onda senoidal
@@ -91,5 +89,7 @@ public class AudioGerador {
         // Encerrando a linha de áudio
         line.drain();
         line.close();
+
     }
+
 }

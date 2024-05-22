@@ -10,10 +10,9 @@ public class SQLDatabaseConnection {
 
     public static void main(String[] args) {
 
-        String connectionUrl = "jdbc:sqlserver://192.168.1.111:1433;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
+        String connectionUrl = "jdbc:sqlserver://192.168.1.111:1433instance=PC-GUSTAVO;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
 
-        String insertSql = "INSERT INTO dbo.Usuarios (Nome, Email, Senha) "
-                + "VALUES ('Zaccheu', 'zaccheuzinho123@gmail.com', 'AiTigrao123');";
+        String insertSql = "select * from usuarios";
         ResultSet resultSet = null;
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);

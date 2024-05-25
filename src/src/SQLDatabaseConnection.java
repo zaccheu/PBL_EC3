@@ -10,9 +10,15 @@ public class SQLDatabaseConnection {
 
     public static void main(String[] args) {
 
+<<<<<<< Updated upstream
         String connectionUrl = "jdbc:sqlserver://192.168.1.111:1433instance=PC-GUSTAVO;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
 
         String insertSql = "select * from usuarios";
+=======
+        String connectionUrl = "jdbc:sqlserver://192.168.56.1:1433;instance=HPFS-CE-LAB6734;databaseName=PBL_TESTE;user=sa;password=123456;encrypt=false; trustServerCertificate=true";
+
+        String insertSql = "insert into Clientes (Nome, senha) values ('gugu123', 'senhaboba123')";
+>>>>>>> Stashed changes
         ResultSet resultSet = null;
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);

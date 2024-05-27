@@ -11,7 +11,6 @@ public class SQLDatabaseConnection {
     public static void main(String[] args) {
 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
         String connectionUrl = "jdbc:sqlserver://192.168.1.111:1433instance=PC-GUSTAVO;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
 
         String insertSql = "select * from usuarios";
@@ -20,11 +19,6 @@ public class SQLDatabaseConnection {
 
         String insertSql = "insert into Clientes (Nome, senha) values ('gugu123', 'senhaboba123')";
 >>>>>>> Stashed changes
-=======
-        String connectionUrl = "jdbc:sqlserver://26.90.38.31:1433;instance=PC-GUSTAVO;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
-
-        String insertSql = "select Nome from usuarios;";
->>>>>>> Stashed changes
         ResultSet resultSet = null;
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
@@ -32,7 +26,7 @@ public class SQLDatabaseConnection {
 
             prepsInsertProduct.execute();
             // Retrieve the generated key from the insert.
-            resultSet = prepsInsertProduct.getResultSet();
+            resultSet = prepsInsertProduct.getGeneratedKeys();
 
             // Print the ID of the inserted row.
             while (resultSet.next()) {

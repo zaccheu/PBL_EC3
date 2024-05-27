@@ -15,7 +15,6 @@ public class SQLDatabaseConnection {
         String insertSql = "select * from usuarios;";
 
         ResultSet resultSet = null;
-
         try (Connection connection = DriverManager.getConnection(connectionUrl);
              PreparedStatement prepsInsertProduct = connection.prepareStatement(insertSql);) {
 

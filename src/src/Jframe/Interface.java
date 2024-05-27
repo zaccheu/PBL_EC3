@@ -24,7 +24,7 @@ public class Interface {
         Image resizedImage = originalImage.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
 
-        // JLabel para a imagem
+        // JLabel para colocar a imagem
         JLabel labelImage = new JLabel();
         labelImage.setIcon(resizedImageIcon);
         labelImage.setHorizontalAlignment(JLabel.CENTER);

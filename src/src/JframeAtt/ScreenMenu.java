@@ -20,23 +20,38 @@ public class ScreenMenu extends JFrame implements ActionListener
 
         JButton jButton = new JButton("Simular Áudio");
         jButton.setBounds(120, 215, 240, 70);
-        jButton.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        jButton.setFont(new Font("Century Gothic", Font.PLAIN, 30));
         jButton.setForeground(new Color(0, 0, 0));
         jButton.setBackground(new Color(124, 104, 104));
-
+        jButton.setFocusable(false);
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ScreenSimAud(ScreenMenu.this);
+                dispose();
+            }
+        });
         add(jButton);
 
         JButton jButton2 = new JButton("Histórico");
         jButton2.setBounds(440, 215, 250, 70);
-        jButton2.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        jButton2.setFont(new Font("Century Gothic", Font.PLAIN, 30));
         jButton2.setForeground(new Color(0, 0, 0));
         jButton2.setBackground(new Color(124, 104, 104));
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ScreenHistorico(ScreenMenu.this);
+                dispose();
+            }
+        });
         add(jButton2);
 
 
         JLabel jLabel = new JLabel("Escoha uma das opções a seguir :");
         jLabel.setBounds(146, 100, 700, 100);
-        jLabel.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+        jLabel.setFont(new Font("Century Gothic", Font.PLAIN, 40));
 
         add(jLabel);
 

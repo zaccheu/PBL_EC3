@@ -2,6 +2,11 @@ package Jframe;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import JframeAtt.ScreenMenu;
+
 
 public class Interface {
 
@@ -61,6 +66,13 @@ public class Interface {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(240, 225, 210));
         JButton loginButton = new JButton("Entrar");
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ScreenMenu().setVisible(true);
+
+            }
+        });
         JButton registerButton = new JButton("Cadastrar");
         loginButton.setPreferredSize(new Dimension(120,35));
         registerButton.setPreferredSize(new Dimension(120,35));

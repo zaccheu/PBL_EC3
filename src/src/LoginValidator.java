@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class LoginValidator {
 
-    private static final String URL = "jdbc:sqlserver://192.168.1.111:1433;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
+    private static final String URL = "jdbc:sqlserver://26.90.38.31:1433;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false; trustServerCertificate=true";
 
     public boolean validateLogin(String email, String senha) {
         String sql = "SELECT * FROM Usuarios WHERE email = ? AND senha = ?"; // OS ? PEGAM AS VARIÁVEIS EM ORDEM E COLOCA AQUI
@@ -25,16 +25,5 @@ public class LoginValidator {
             return false;
         }
     }
-
-    public static void main(String[] args) {
-        LoginValidator validator = new LoginValidator();
-        String email = "zaccheuzinho@gmail.com";
-        String senha = "AiTigrao";
-
-        if (validator.validateLogin(email, senha)) {
-            System.out.println("Login válido!");
-        } else {
-            System.out.println("Login inválido!");
-        }
-    }
 }
+

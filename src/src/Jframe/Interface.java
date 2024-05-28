@@ -5,10 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import BancoDados.*;
 import JframeAtt.ScreenMenu;
 
 
 public class Interface {
+    private String usuario;
+    private String senha;
 
     public Interface() {
         JFrame login = new JFrame();
@@ -69,8 +72,16 @@ public class Interface {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ScreenMenu().setVisible(true);
+                usuario = userField.getText();
+                senha = new String(passwordField.getPassword()); // Use getPassword() para obter a senha corretamente
+                boolean verificacao = validaUsuaruio(usuario,senha);
 
+
+                if (verificacao) {
+                    new ScreenMenu().setVisible(true);                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Usuário ou senha inválido. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         JButton registerButton = new JButton("Cadastrar");
@@ -78,6 +89,24 @@ public class Interface {
         registerButton.setPreferredSize(new Dimension(120,35));
         buttonPanel.add(loginButton);
         buttonPanel.add(registerButton);
+
+        // ação do botão register
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuario = userField.getText();
+                senha = new String(passwordField.getPassword()); // Use getPassword() para obter a senha corretamente
+                CadastraUsuario cadastro = new CadastraUsuario();
+                boolean sucesso = cadastro.inserirUsuario(usuario, senha);
+
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(null, "Usuário inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao inserir usuário. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
 
         // Adicionando componentes ao painel de dados
         dataPanel.add(titleLabel);
@@ -107,6 +136,24 @@ public class Interface {
         // Tornar o frame visível no final
         login.setVisible(true);
     }
+    public void inserirUsuaruio(String usuario, String senha){
+        this.usuario = usuario;
+        this.senha = senha;
+        CadastraUsuario inserir = new CadastraUsuario();
+        inserir.inserirUsuario(usuario,senha);
+
+
+    }
+    public boolean validaUsuaruio(String usuario, String senha){
+        this.usuario = usuario;
+        this.senha = senha;
+        validaUsuario validar = new validaUsuario();
+
+
+
+        return validar.validarUsuario(usuario,senha);
+    }
+
 
     public static void main(String[] args) {
         new Interface();

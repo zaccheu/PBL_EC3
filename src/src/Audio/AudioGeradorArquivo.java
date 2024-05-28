@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class AudioGeradorArquivo {
 
-    public void gerarArquivo(double frqEmi, double disIni, double velFont) throws LineUnavailableException, IOException {
+    public File gerarArquivo(double frqEmi, double disIni, double velFont) throws LineUnavailableException, IOException {
         // Parâmetros do efeito Doppler
         double freqFonte = frqEmi; // Frequência da sirene da ambulância em Hz
         double distanciaIncial_Obs = disIni; // Distância inicial em metros
@@ -67,8 +67,8 @@ public class AudioGeradorArquivo {
             buffer[i * 2 + 1] = (byte) (taxaDeAmostragem >> 8);
         }
 
-        // Salvando o áudio gerado em um arquivo WAV
-        File wavFile = new File("output.wav");
+        // Gerando o nome do arquivo em ordem crescente
+        File wavFile = pegaProximoNome();
         ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
         AudioInputStream ais = new AudioInputStream(bais, audioFormat, buffer.length / 2);
         AudioSystem.write(ais, AudioFileFormat.Type.WAVE, wavFile);
@@ -92,5 +92,17 @@ public class AudioGeradorArquivo {
         // Encerrando a linha de áudio
         line.drain();
         line.close();
+
+        return wavFile;
+    }
+
+    private File pegaProximoNome() {
+        int contaMaior = 1;
+        File arquivo;
+        do {
+            arquivo = new File("output(" + contaMaior + ").wav");
+            contaMaior++;
+        } while (arquivo.exists());
+        return arquivo;
     }
 }

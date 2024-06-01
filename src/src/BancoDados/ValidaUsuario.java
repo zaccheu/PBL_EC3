@@ -13,6 +13,7 @@ public class validaUsuario {
         this.usuario = usuario;
         this.senha = senha;
 
+
         String connectionUrl = "jdbc:sqlserver://26.90.38.31:1433;databaseName=PBL_EC3;user=patati;password=Bruce2023;encrypt=false;trustServerCertificate=true";
 
         String insertSql = "DECLARE @Email VARCHAR(30) = ?;\n" +
@@ -44,4 +45,7 @@ public class validaUsuario {
         return false;
     }
 
+
 }
+
+

@@ -5,9 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import BancoDados.*;
+import BancoDados.Armazem;
+import BancoDados.CadastraUsuario;
+import BancoDados.validaUsuario;
 import JframeAtt.ScreenMenu;
-
 
 public class Interface {
     private String usuario;
@@ -74,19 +75,19 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
                 usuario = userField.getText();
                 senha = new String(passwordField.getPassword()); // Use getPassword() para obter a senha corretamente
-                boolean verificacao = validaUsuaruio(usuario,senha);
-
+                boolean verificacao = validaUsuaruio(usuario, senha);
 
                 if (verificacao) {
-                    new ScreenMenu().setVisible(true);                }
-                else {
+                    Armazem.getInstance().setUsuario(usuario);
+                    new ScreenMenu().setVisible(true);
+                } else {
                     JOptionPane.showMessageDialog(null, "Usuário ou senha inválido. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
         JButton registerButton = new JButton("Cadastrar");
-        loginButton.setPreferredSize(new Dimension(120,35));
-        registerButton.setPreferredSize(new Dimension(120,35));
+        loginButton.setPreferredSize(new Dimension(120, 35));
+        registerButton.setPreferredSize(new Dimension(120, 35));
         buttonPanel.add(loginButton);
         buttonPanel.add(registerButton);
 
@@ -106,7 +107,6 @@ public class Interface {
                 }
             }
         });
-
 
         // Adicionando componentes ao painel de dados
         dataPanel.add(titleLabel);
@@ -136,24 +136,20 @@ public class Interface {
         // Tornar o frame visível no final
         login.setVisible(true);
     }
-    public void inserirUsuaruio(String usuario, String senha){
+
+    public void inserirUsuaruio(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
         CadastraUsuario inserir = new CadastraUsuario();
-        inserir.inserirUsuario(usuario,senha);
-
-
+        inserir.inserirUsuario(usuario, senha);
     }
-    public boolean validaUsuaruio(String usuario, String senha){
+
+    public boolean validaUsuaruio(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
         validaUsuario validar = new validaUsuario();
-
-
-
-        return validar.validarUsuario(usuario,senha);
+        return validar.validarUsuario(usuario, senha);
     }
-
 
     public static void main(String[] args) {
         new Interface();

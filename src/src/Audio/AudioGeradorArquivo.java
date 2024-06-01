@@ -1,11 +1,20 @@
 package Audio;
 
+import BancoDados.Armazem;
+import BancoDados.LancaDados;
+
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
 public class AudioGeradorArquivo {
+    private double freqReal;
+    private double ampSenoidal;
+    private double velFonte;
+    private double distIni;
+    private double tempoSim;
+    private double freqObservada;
 
     public File gerarArquivo(double frqEmi, double disIni, double velFont) throws LineUnavailableException, IOException {
         // Parâmetros do efeito Doppler
@@ -89,9 +98,20 @@ public class AudioGeradorArquivo {
         double senoTaylor = Seno.senoPorTaylor(senoidal);
         System.out.println(String.format("Seno, lib math: %.12f , taylor: %.12f ", senoMath, senoTaylor));
 
+        this.freqReal = freqFonte;
+        this.ampSenoidal = senoidal;
+        this.velFonte = veloFonte;
+        this.distIni = distanciaIncial_Obs;
+        this.tempoSim = tempoTotal;
+        this.freqObservada = freqObservada;
+
         // Encerrando a linha de áudio
         line.drain();
         line.close();
+
+        // Supondo que você tenha uma instância do Armazem contendo o email do usuário
+        String email = Armazem.getInstance().getUsuario();
+        coletaDados(email, (float) freqReal, (float) ampSenoidal, (float) velFonte, (float) distIni, (float) tempoSim, (float) freqObservada);
 
         return wavFile;
     }
@@ -104,5 +124,10 @@ public class AudioGeradorArquivo {
             contaMaior++;
         } while (arquivo.exists());
         return arquivo;
+    }
+
+    private void coletaDados(String email, float freqInicial, float ampSenoidal, float velRelativa, float distInicial, float tempoSimul, float freqObservada){
+        LancaDados coleta = new LancaDados();
+        coleta.inserirSimulacao(email, freqInicial, ampSenoidal, velRelativa, distInicial, tempoSimul, freqObservada);
     }
 }

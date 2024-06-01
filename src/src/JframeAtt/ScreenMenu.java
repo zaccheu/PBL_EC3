@@ -89,6 +89,3 @@ public class ScreenMenu extends JFrame implements ActionListener
 
     }
 }
-
-
-

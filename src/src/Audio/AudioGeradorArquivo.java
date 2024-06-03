@@ -1,13 +1,22 @@
 package Audio;
 
+import BancoDados.Armazem;
+import BancoDados.LancaDados;
+
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
 public class AudioGeradorArquivo {
+    private double freqReal;
+    private double ampSenoidal;
+    private double velFonte;
+    private double distIni;
+    private double tempoSim;
+    private double freqObservada;
 
-    public void gerarArquivo(double frqEmi, double disIni, double velFont) throws LineUnavailableException, IOException {
+    public File gerarArquivo(double frqEmi, double disIni, double velFont) throws LineUnavailableException, IOException {
         // Parâmetros do efeito Doppler
         double freqFonte = frqEmi; // Frequência da sirene da ambulância em Hz
         double distanciaIncial_Obs = disIni; // Distância inicial em metros
@@ -67,8 +76,8 @@ public class AudioGeradorArquivo {
             buffer[i * 2 + 1] = (byte) (taxaDeAmostragem >> 8);
         }
 
-        // Salvando o áudio gerado em um arquivo WAV
-        File wavFile = new File("output.wav");
+        // Gerando o nome do arquivo em ordem crescente
+        File wavFile = pegaProximoNome();
         ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
         AudioInputStream ais = new AudioInputStream(bais, audioFormat, buffer.length / 2);
         AudioSystem.write(ais, AudioFileFormat.Type.WAVE, wavFile);
@@ -89,8 +98,36 @@ public class AudioGeradorArquivo {
         double senoTaylor = Seno.senoPorTaylor(senoidal);
         System.out.println(String.format("Seno, lib math: %.12f , taylor: %.12f ", senoMath, senoTaylor));
 
+        this.freqReal = freqFonte;
+        this.ampSenoidal = senoidal;
+        this.velFonte = veloFonte;
+        this.distIni = distanciaIncial_Obs;
+        this.tempoSim = tempoTotal;
+        this.freqObservada = freqObservada;
+
         // Encerrando a linha de áudio
         line.drain();
         line.close();
+
+        // Supondo que você tenha uma instância do Armazem contendo o email do usuário
+        String email = Armazem.getInstance().getUsuario();
+        coletaDados(email, (float) freqReal, (float) ampSenoidal, (float) velFonte, (float) distIni, (float) tempoSim, (float) freqObservada);
+
+        return wavFile;
+    }
+
+    private File pegaProximoNome() {
+        int contaMaior = 1;
+        File arquivo;
+        do {
+            arquivo = new File("output(" + contaMaior + ").wav");
+            contaMaior++;
+        } while (arquivo.exists());
+        return arquivo;
+    }
+
+    private void coletaDados(String email, float freqInicial, float ampSenoidal, float velRelativa, float distInicial, float tempoSimul, float freqObservada){
+        LancaDados coleta = new LancaDados();
+        coleta.inserirSimulacao(email, freqInicial, ampSenoidal, velRelativa, distInicial, tempoSimul, freqObservada);
     }
 }

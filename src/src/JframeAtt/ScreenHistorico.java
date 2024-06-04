@@ -49,7 +49,7 @@ class ScreenHistorico extends JFrame {
         tabelaPanel.setLayout(new BorderLayout());
 
         // Colunas da tabela
-        String[] colunas = {"ID", "Frequência Inicial", "Amplitude Senoidal", "Velocidade Relativa", "Distância Inicial", "Tempo de Simulação", "Frequência Observada"};
+        String[] colunas = {"Frequência Inicial", "Amplitude Senoidal", "Velocidade Relativa", "Distância Inicial", "Tempo de Simulação", "Frequência Observada"};
 
         // Modelo da tabela
         DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
@@ -62,7 +62,6 @@ class ScreenHistorico extends JFrame {
         // Preencher a tabela com os dados das simulações
         for (Simulacao simulacao : simulacoes) {
             Object[] linha = {
-                    simulacao.getSimulacaoID(),
                     simulacao.getFrequenciaInicial(),
                     simulacao.getAmplitudeSenoidal(),
                     simulacao.getVelocidadeRelativa(),

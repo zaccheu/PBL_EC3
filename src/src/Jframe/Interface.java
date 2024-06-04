@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import BancoDados.Armazem;
 import BancoDados.CadastraUsuario;
-import BancoDados.validaUsuario;
+import BancoDados.ValidaUsuario;
 import JframeAtt.ScreenMenu;
 
 public class Interface {
@@ -147,7 +147,7 @@ public class Interface {
     public boolean validaUsuaruio(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
-        validaUsuario validar = new validaUsuario();
+        ValidaUsuario validar = new ValidaUsuario();
         return validar.validarUsuario(usuario, senha);
     }
 

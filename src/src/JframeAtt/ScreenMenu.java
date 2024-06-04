@@ -12,7 +12,7 @@ public class ScreenMenu extends JFrame implements ActionListener
         setTitle("Menu");
         setVisible(true);
         setSize( 1000, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);

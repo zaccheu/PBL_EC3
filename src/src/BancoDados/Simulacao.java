@@ -1,7 +1,6 @@
 package BancoDados;
 
 public class Simulacao {
-    private int simulacaoID;
     private int usuarioID;
     private float frequenciaInicial;
     private float amplitudeSenoidal;
@@ -10,8 +9,7 @@ public class Simulacao {
     private float tempoSimulacao;
     private float freqObservado;
 
-    public Simulacao(int simulacaoID, int usuarioID, float frequenciaInicial, float amplitudeSenoidal, float velocidadeRelativa, float distanciaInicial, float tempoSimulacao, float freqObservado) {
-        this.simulacaoID = simulacaoID;
+    public Simulacao( int usuarioID, float frequenciaInicial, float amplitudeSenoidal, float velocidadeRelativa, float distanciaInicial, float tempoSimulacao, float freqObservado) {
         this.usuarioID = usuarioID;
         this.frequenciaInicial = frequenciaInicial;
         this.amplitudeSenoidal = amplitudeSenoidal;
@@ -22,10 +20,6 @@ public class Simulacao {
     }
 
     // Getters
-    public int getSimulacaoID() {
-        return simulacaoID;
-    }
-
     public int getUsuarioID() {
         return usuarioID;
     }

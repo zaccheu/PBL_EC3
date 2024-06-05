@@ -1,7 +1,7 @@
 package Audio;
 
 import BancoDados.Armazem;
-import BancoDados.LancaDados;
+import BancoDados.BancoDeDados;
 
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
@@ -15,6 +15,7 @@ public class AudioGeradorArquivo {
     private double distIni;
     private double tempoSim;
     private double freqObservada;
+    private String caminhoArquivo;
 
     public File gerarArquivo(double frqEmi, double disIni, double velFont) throws LineUnavailableException, IOException {
         // Parâmetros do efeito Doppler
@@ -78,6 +79,7 @@ public class AudioGeradorArquivo {
 
         // Gerando o nome do arquivo em ordem crescente
         File wavFile = pegaProximoNome();
+        caminhoArquivo = wavFile.getAbsolutePath(); // Armazena o caminho do arquivo
         ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
         AudioInputStream ais = new AudioInputStream(bais, audioFormat, buffer.length / 2);
         AudioSystem.write(ais, AudioFileFormat.Type.WAVE, wavFile);
@@ -111,7 +113,7 @@ public class AudioGeradorArquivo {
 
         // Supondo que você tenha uma instância do Armazem contendo o email do usuário
         String email = Armazem.getInstance().getUsuario();
-        coletaDados(email, (float) freqReal, (float) ampSenoidal, (float) velFonte, (float) distIni, (float) tempoSim, (float) freqObservada);
+        coletaDados(email, (float) freqReal, (float) ampSenoidal, (float) velFonte, (float) distIni, (float) tempoSim, (float) freqObservada, caminhoArquivo);
 
         return wavFile;
     }
@@ -126,8 +128,8 @@ public class AudioGeradorArquivo {
         return arquivo;
     }
 
-    private void coletaDados(String email, float freqInicial, float ampSenoidal, float velRelativa, float distInicial, float tempoSimul, float freqObservada){
-        LancaDados coleta = new LancaDados();
-        coleta.inserirSimulacao(email, freqInicial, ampSenoidal, velRelativa, distInicial, tempoSimul, freqObservada);
+    private void coletaDados(String email, float freqInicial, float ampSenoidal, float velRelativa, float distInicial, float tempoSimul, float freqObservada, String caminhoArquivo){
+        BancoDeDados coleta = new BancoDeDados();
+        coleta.inserirSimulacao(email, freqInicial, ampSenoidal, velRelativa, distInicial, tempoSimul, freqObservada, caminhoArquivo);
     }
 }

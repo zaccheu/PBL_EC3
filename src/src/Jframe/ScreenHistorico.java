@@ -1,7 +1,7 @@
-package JframeAtt;
+package Jframe;
 
 import BancoDados.Armazem;
-import BancoDados.LancaDados;
+import BancoDados.BancoDeDados;
 import BancoDados.Simulacao;
 
 import javax.swing.*;
@@ -20,49 +20,48 @@ class ScreenHistorico extends JFrame {
         setLayout(null);
         getContentPane().setBackground(new Color(240, 225, 210));
 
-        JLabel jLabel = new JLabel("HISTÓRICO");
-        jLabel.setBounds(30, 10, 250, 60);
-        jLabel.setFont(new Font("Century Gothic", Font.PLAIN, 35));
-        jLabel.setVisible(true);
-        add(jLabel);
+        JLabel labelTitulo = new JLabel("HISTÓRICO");
+        labelTitulo.setBounds(30, 10, 250, 60);
+        labelTitulo.setFont(new Font("Century Gothic", Font.PLAIN, 35));
+        labelTitulo.setVisible(true);
+        add(labelTitulo);
 
         // Label de fundo do Título
-        JLabel jLabel3 = new JLabel();
-        jLabel3.setBounds(0, 35, 1000, 5);
-        jLabel3.setBackground(Color.white);
-        jLabel3.setVisible(true);
-        jLabel3.setOpaque(true);
-        add(jLabel3);
+        JLabel labelFundoSuperior = new JLabel();
+        labelFundoSuperior.setBounds(0, 35, 1000, 5);
+        labelFundoSuperior.setBackground(Color.white);
+        labelFundoSuperior.setVisible(true);
+        labelFundoSuperior.setOpaque(true);
+        add(labelFundoSuperior);
 
         // Label de fundo do Título
-        JLabel jLabel4 = new JLabel();
-        jLabel4.setBounds(0, 45, 1000, 5);
-        jLabel4.setBackground(Color.white);
-        jLabel4.setVisible(true);
-        jLabel4.setOpaque(true);
-        add(jLabel4);
+        JLabel labelFundoSuperior2 = new JLabel();
+        labelFundoSuperior2.setBounds(0, 45, 1000, 5);
+        labelFundoSuperior2.setBackground(Color.white);
+        labelFundoSuperior2.setVisible(true);
+        labelFundoSuperior2.setOpaque(true);
+        add(labelFundoSuperior2);
 
         // Painel para exibir as simulações em tabela
-        JPanel tabelaPanel = new JPanel();
-        tabelaPanel.setBounds(10, 110, 960, 350);
-        tabelaPanel.setBackground(new Color(210, 195, 180));
-        tabelaPanel.setLayout(new BorderLayout());
+        JPanel painelTabela = new JPanel();
+        painelTabela.setBounds(10, 110, 960, 350);
+        painelTabela.setBackground(new Color(210, 195, 180));
+        painelTabela.setLayout(new BorderLayout());
 
         // Colunas da tabela
-        String[] colunas = {"ID", "Frequência Inicial", "Amplitude Senoidal", "Velocidade Relativa", "Distância Inicial", "Tempo de Simulação", "Frequência Observada"};
+        String[] colunas = {"Frequência Inicial(Hz)", "Amplitude Senoidal", "Velocidade Relativa(m/s)", "Distância Inicial(m)", "Tempo de Simulação(s)", "Frequência Observada(Hz)"};
 
         // Modelo da tabela
         DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 
         // Buscar as simulações do usuário logado
         String usuario = Armazem.getInstance().getUsuario();
-        LancaDados lancaDados = new LancaDados();
+        BancoDeDados lancaDados = new BancoDeDados();
         List<Simulacao> simulacoes = lancaDados.buscarSimulacoesPorUsuario(usuario);
 
         // Preencher a tabela com os dados das simulações
         for (Simulacao simulacao : simulacoes) {
             Object[] linha = {
-                    simulacao.getSimulacaoID(),
                     simulacao.getFrequenciaInicial(),
                     simulacao.getAmplitudeSenoidal(),
                     simulacao.getVelocidadeRelativa(),
@@ -78,20 +77,20 @@ class ScreenHistorico extends JFrame {
 
         // Adicionar a tabela a um JScrollPane para permitir rolagem
         JScrollPane scrollPane = new JScrollPane(tabela);
-        tabelaPanel.add(scrollPane, BorderLayout.CENTER);
+        painelTabela.add(scrollPane, BorderLayout.CENTER);
 
-        add(tabelaPanel);
+        add(painelTabela);
 
-        JButton jButton3 = new JButton("Menu");
-        jButton3.setBounds(410, 480, 180, 50);
-        jButton3.setFont(new Font("Century Gothic", Font.PLAIN, 25));
-        jButton3.setForeground(new Color(0, 0, 0));
-        jButton3.setBackground(new Color(235, 235, 235));
-        jButton3.setFocusable(false);
-        jButton3.addActionListener(e -> {
+        JButton botaoMenu = new JButton("Menu");
+        botaoMenu.setBounds(410, 480, 180, 50);
+        botaoMenu.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+        botaoMenu.setForeground(new Color(0, 0, 0));
+        botaoMenu.setBackground(new Color(235, 235, 235));
+        botaoMenu.setFocusable(false);
+        botaoMenu.addActionListener(e -> {
             new ScreenMenu();
             dispose();
         });
-        add(jButton3);
+        add(botaoMenu);
     }
 }

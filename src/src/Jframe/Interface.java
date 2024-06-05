@@ -6,9 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import BancoDados.Armazem;
-import BancoDados.CadastraUsuario;
-import BancoDados.validaUsuario;
-import JframeAtt.ScreenMenu;
+import BancoDados.BancoDeDados;
 
 public class Interface {
     private String usuario;
@@ -23,58 +21,58 @@ public class Interface {
         login.setLocationRelativeTo(null);
 
         // Imagem do ícone
-        ImageIcon logo = new ImageIcon(getClass().getResource("/Jframe/icon_login.jpg"));
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Jframe/imagens/icon_login.jpg"));
         login.setIconImage(logo.getImage());
         login.getContentPane().setBackground(new Color(240, 225, 210));
 
         // Carregar e redimensionar a imagem
-        ImageIcon originalImageIcon = new ImageIcon(getClass().getResource("/Jframe/imagem1_login.png"));
-        Image originalImage = originalImageIcon.getImage();
-        Image resizedImage = originalImage.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+        ImageIcon imagemPrincipal = new ImageIcon(getClass().getResource("/Jframe/imagens/imagem1_login.png"));
+        Image imagemPrincipalRedimensionada = imagemPrincipal.getImage();
+        Image resizedImage = imagemPrincipalRedimensionada.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
 
         // JLabel para colocar a imagem
-        JLabel labelImage = new JLabel();
-        labelImage.setIcon(resizedImageIcon);
-        labelImage.setHorizontalAlignment(JLabel.CENTER);
-        labelImage.setVerticalAlignment(JLabel.CENTER);
+        JLabel labelImagemPrincipal = new JLabel();
+        labelImagemPrincipal.setIcon(resizedImageIcon);
+        labelImagemPrincipal.setHorizontalAlignment(JLabel.CENTER);
+        labelImagemPrincipal.setVerticalAlignment(JLabel.CENTER);
 
         // Painel direito para a imagem
-        JPanel rightPanel = new JPanel(new BorderLayout());
-        rightPanel.setBackground(new Color(240, 225, 210));
-        rightPanel.add(labelImage, BorderLayout.CENTER);
+        JPanel painelDireito = new JPanel(new BorderLayout());
+        painelDireito.setBackground(new Color(240, 225, 210));
+        painelDireito.add(labelImagemPrincipal, BorderLayout.CENTER);
 
         // Painel de dados
-        JPanel dataPanel = new JPanel();
-        dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
-        dataPanel.setBackground(new Color(240, 225, 210));
+        JPanel painelDeDados = new JPanel();
+        painelDeDados.setLayout(new BoxLayout(painelDeDados, BoxLayout.Y_AXIS));
+        painelDeDados.setBackground(new Color(240, 225, 210));
 
-        JLabel titleLabel = new JLabel("EcoDoppler");
-        titleLabel.setFont(new Font("Century Gothic", Font.BOLD, 50));
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel tituloPrincipal = new JLabel("EcoDoppler");
+        tituloPrincipal.setFont(new Font("Century Gothic", Font.BOLD, 50));
+        tituloPrincipal.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel userLabel = new JLabel("Usuário:");
-        userLabel.setFont(new Font("Century Gothic", Font.PLAIN, 24));
-        userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel labelUsuario = new JLabel("Usuário:");
+        labelUsuario.setFont(new Font("Century Gothic", Font.PLAIN, 24));
+        labelUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField userField = new JTextField();
-        userField.setPreferredSize(new Dimension(400, 30));
+        JTextField textBoxUsuario = new JTextField();
+        textBoxUsuario.setPreferredSize(new Dimension(400, 30));
 
-        JLabel passwordLabel = new JLabel("Senha:");
-        passwordLabel.setFont(new Font("Century Gothic", Font.PLAIN, 24));
-        passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel labelSenha = new JLabel("Senha:");
+        labelSenha.setFont(new Font("Century Gothic", Font.PLAIN, 24));
+        labelSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPasswordField passwordField = new JPasswordField();
-        passwordField.setPreferredSize(new Dimension(400, 30));
+        JPasswordField textBoxSenha = new JPasswordField();
+        textBoxSenha.setPreferredSize(new Dimension(400, 30));
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(240, 225, 210));
-        JButton loginButton = new JButton("Entrar");
-        loginButton.addActionListener(new ActionListener() {
+        JPanel painelBotoes = new JPanel();
+        painelBotoes.setBackground(new Color(240, 225, 210));
+        JButton botaoLogin = new JButton("Entrar");
+        botaoLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuario = userField.getText();
-                senha = new String(passwordField.getPassword()); // Use getPassword() para obter a senha corretamente
+                usuario = textBoxUsuario.getText();
+                senha = new String(textBoxSenha.getPassword()); // Use getPassword() para obter a senha corretamente
                 boolean verificacao = validaUsuaruio(usuario, senha);
 
                 if (verificacao) {
@@ -85,19 +83,19 @@ public class Interface {
                 }
             }
         });
-        JButton registerButton = new JButton("Cadastrar");
-        loginButton.setPreferredSize(new Dimension(120, 35));
-        registerButton.setPreferredSize(new Dimension(120, 35));
-        buttonPanel.add(loginButton);
-        buttonPanel.add(registerButton);
+        JButton botaoCadastrar = new JButton("Cadastrar");
+        botaoLogin.setPreferredSize(new Dimension(120, 35));
+        botaoCadastrar.setPreferredSize(new Dimension(120, 35));
+        painelBotoes.add(botaoLogin);
+        painelBotoes.add(botaoCadastrar);
 
         // ação do botão register
-        registerButton.addActionListener(new ActionListener() {
+        botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuario = userField.getText();
-                senha = new String(passwordField.getPassword()); // Use getPassword() para obter a senha corretamente
-                CadastraUsuario cadastro = new CadastraUsuario();
+                usuario = textBoxUsuario.getText();
+                senha = new String(textBoxSenha.getPassword()); // Use getPassword() para obter a senha corretamente
+                BancoDeDados cadastro = new BancoDeDados();
                 boolean sucesso = cadastro.inserirUsuario(usuario, senha);
 
                 if (sucesso) {
@@ -109,29 +107,29 @@ public class Interface {
         });
 
         // Adicionando componentes ao painel de dados
-        dataPanel.add(titleLabel);
-        dataPanel.add(Box.createRigidArea(new Dimension(0, 75))); // Espaçamento entre o título e os campos
-        dataPanel.add(userLabel);
-        dataPanel.add(userField);
-        dataPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento entre os campos
-        dataPanel.add(passwordLabel);
-        dataPanel.add(passwordField);
-        dataPanel.add(Box.createRigidArea(new Dimension(0, 75))); // Espaçamento entre os campos e os botões
-        dataPanel.add(buttonPanel);
+        painelDeDados.add(tituloPrincipal);
+        painelDeDados.add(Box.createRigidArea(new Dimension(0, 75))); // Espaçamento entre o título e os campos
+        painelDeDados.add(labelUsuario);
+        painelDeDados.add(textBoxUsuario);
+        painelDeDados.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento entre os campos
+        painelDeDados.add(labelSenha);
+        painelDeDados.add(textBoxSenha);
+        painelDeDados.add(Box.createRigidArea(new Dimension(0, 75))); // Espaçamento entre os campos e os botões
+        painelDeDados.add(painelBotoes);
 
         // Painel esquerdo para centralizar o painel de dados
-        JPanel leftPanel = new JPanel(new GridBagLayout());
-        leftPanel.setBackground(new Color(240, 225, 210));
-        leftPanel.add(dataPanel, new GridBagConstraints());
+        JPanel painelEsquerdo = new JPanel(new GridBagLayout());
+        painelEsquerdo.setBackground(new Color(240, 225, 210));
+        painelEsquerdo.add(painelDeDados, new GridBagConstraints());
 
         // Painel principal para dividir a janela em metades
-        JPanel mainPanel = new JPanel(new GridLayout(1, 2));
-        mainPanel.setBackground(new Color(240, 225, 210));
-        mainPanel.add(leftPanel);
-        mainPanel.add(rightPanel);
+        JPanel painelPrincipal = new JPanel(new GridLayout(1, 2));
+        painelPrincipal.setBackground(new Color(240, 225, 210));
+        painelPrincipal.add(painelEsquerdo);
+        painelPrincipal.add(painelDireito);
 
         // Adicionando o painel principal ao JFrame
-        login.add(mainPanel);
+        login.add(painelPrincipal);
 
         // Tornar o frame visível no final
         login.setVisible(true);
@@ -140,14 +138,14 @@ public class Interface {
     public void inserirUsuaruio(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
-        CadastraUsuario inserir = new CadastraUsuario();
+        BancoDeDados inserir = new BancoDeDados();
         inserir.inserirUsuario(usuario, senha);
     }
 
     public boolean validaUsuaruio(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
-        validaUsuario validar = new validaUsuario();
+        BancoDeDados validar = new BancoDeDados();
         return validar.validarUsuario(usuario, senha);
     }
 

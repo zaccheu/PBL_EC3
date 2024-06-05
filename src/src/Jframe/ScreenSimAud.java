@@ -1,6 +1,9 @@
-package JframeAtt;
+package Jframe;
 
 import Audio.*;
+import BancoDados.BancoDeDados;
+import Jframe.ScreenMenu;
+import Jframe.ScreenRepAud;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
@@ -17,8 +20,11 @@ public class ScreenSimAud extends JFrame {
     double velociadadeFonte;
     boolean unidadeDistanciaKm;
     boolean unidadeVelocidadeKmh;
+    private ScreenMenu screenMenu; // Adicione essa linha
 
-    public ScreenSimAud(JFrame ScreenMenu) {
+    public ScreenSimAud(JFrame screenMenu) {
+        this.screenMenu = (ScreenMenu) screenMenu; // Adicione essa linha
+
         JCheckBox metrosDistancia;
         JCheckBox kilometrosDistancia;
         JCheckBox metrosVelocidade;
@@ -32,55 +38,56 @@ public class ScreenSimAud extends JFrame {
         setLayout(null);
         getContentPane().setBackground(new Color(240, 225, 210));
 
-        JLabel txtPrincipal = new JLabel("SIMULADOR");
-        txtPrincipal.setBounds(30, 10, 250, 60);
-        txtPrincipal.setFont(new Font("Century Gothic", Font.PLAIN, 35));
-        txtPrincipal.setVisible(true);
-        add(txtPrincipal);
+        JLabel labelTitulo = new JLabel("SIMULADOR");
+        labelTitulo.setBounds(30, 10, 250, 60);
+        labelTitulo.setFont(new Font("Century Gothic", Font.PLAIN, 35));
+        labelTitulo.setVisible(true);
+        add(labelTitulo);
 
         //Label de fundo principal
-        JLabel jLabel8 = new JLabel();
-        jLabel8.setBounds(0, 180, 1000, 230);
-        jLabel8.setBackground(new Color(210, 195, 180));
-        jLabel8.setVisible(true);
-        jLabel8.setOpaque(true);
+        JLabel labelFundoCentral = new JLabel();
+        labelFundoCentral.setBounds(0, 180, 1000, 230);
+        labelFundoCentral.setBackground(new Color(210, 195, 180));
+        labelFundoCentral.setVisible(true);
+        labelFundoCentral.setOpaque(true);
 
         //Label de fundo do Título
-        JLabel jLabel7 = new JLabel();
-        jLabel7.setBounds(0, 35, 1000, 5);
-        jLabel7.setBackground(Color.white);
-        jLabel7.setVisible(true);
-        jLabel7.setOpaque(true);
-        add(jLabel7);
+        JLabel labelFundoSuperior = new JLabel();
+        labelFundoSuperior.setBounds(0, 35, 1000, 5);
+        labelFundoSuperior.setBackground(Color.white);
+        labelFundoSuperior.setVisible(true);
+        labelFundoSuperior.setOpaque(true);
+        add(labelFundoSuperior);
 
         //Label de fundo do Título
-        JLabel jLabel6 = new JLabel();
-        jLabel6.setBounds(0, 45, 1000, 5);
-        jLabel6.setBackground(Color.white);
-        jLabel6.setVisible(true);
-        jLabel6.setOpaque(true);
-        add(jLabel6);
+        JLabel labelFundoSuperior2 = new JLabel();
+        labelFundoSuperior2.setBounds(0, 45, 1000, 5);
+        labelFundoSuperior2.setBackground(Color.white);
+        labelFundoSuperior2.setVisible(true);
+        labelFundoSuperior2.setOpaque(true);
+        add(labelFundoSuperior2);
 
-        JLabel jLabel2 = new JLabel("Preencha os campos abaixo para realizar a simulação: ");
-        jLabel2.setBounds(150, 110, 800, 50);
-        jLabel2.setFont(new Font("Century Gothic", Font.PLAIN, 27));
-        jLabel2.setVisible(true);
-        add(jLabel2);
+        //Label de texto explicativo
+        JLabel textoExplicativo = new JLabel("Preencha os campos abaixo para realizar a simulação: ");
+        textoExplicativo.setBounds(150, 110, 800, 50);
+        textoExplicativo.setFont(new Font("Century Gothic", Font.PLAIN, 27));
+        textoExplicativo.setVisible(true);
+        add(textoExplicativo);
 
         //Campo DISTÂNCIA
-        JLabel jLabel3 = new JLabel("Distância inicial:");
-        jLabel3.setBounds(50, 240, 250, 40);
-        jLabel3.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        jLabel3.setVisible(true);
-        add(jLabel3);
+        JLabel labelDistancia = new JLabel("Distância inicial:");
+        labelDistancia.setBounds(50, 240, 250, 40);
+        labelDistancia.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        labelDistancia.setVisible(true);
+        add(labelDistancia);
 
-        JTextField distInicial = new JTextField();
-        distInicial.setBounds(50, 280, 200, 40);
-        distInicial.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        distInicial.setForeground(new Color(104, 104, 104));
-        distInicial.setBackground(new Color(165, 165, 165));
-        distInicial.setBorder(new EmptyBorder(0, 10, 0, 10));
-        add(distInicial);
+        JTextField textBoxDistancia = new JTextField();
+        textBoxDistancia.setBounds(50, 280, 200, 40);
+        textBoxDistancia.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        textBoxDistancia.setForeground(new Color(104, 104, 104));
+        textBoxDistancia.setBackground(new Color(165, 165, 165));
+        textBoxDistancia.setBorder(new EmptyBorder(0, 10, 0, 10));
+        add(textBoxDistancia);
 
         metrosDistancia = new JCheckBox("m");
         metrosDistancia.setBounds(250, 270, 60, 40);
@@ -115,19 +122,19 @@ public class ScreenSimAud extends JFrame {
         });
 
         //Campo VELOCIDADE
-        JLabel jLabel4 = new JLabel("Velocidade da Fonte:");
-        jLabel4.setBounds(380, 240, 300, 40);
-        jLabel4.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        jLabel4.setVisible(true);
-        add(jLabel4);
+        JLabel labelVelocidade = new JLabel("Velocidade da Fonte:");
+        labelVelocidade.setBounds(380, 240, 300, 40);
+        labelVelocidade.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        labelVelocidade.setVisible(true);
+        add(labelVelocidade);
 
-        JTextField velFonte = new JTextField();
-        velFonte.setBounds(380, 280, 200, 40);
-        velFonte.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        velFonte.setForeground(new Color(104, 104, 104));
-        velFonte.setBackground(new Color(165, 165, 165));
-        velFonte.setBorder(new EmptyBorder(0, 10, 0, 10));
-        add(velFonte);
+        JTextField textBoxVelocidade = new JTextField();
+        textBoxVelocidade.setBounds(380, 280, 200, 40);
+        textBoxVelocidade.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        textBoxVelocidade.setForeground(new Color(104, 104, 104));
+        textBoxVelocidade.setBackground(new Color(165, 165, 165));
+        textBoxVelocidade.setBorder(new EmptyBorder(0, 10, 0, 10));
+        add(textBoxVelocidade);
 
         metrosVelocidade = new JCheckBox("m/s");
         metrosVelocidade.setBounds(580, 270, 60, 40);
@@ -162,63 +169,63 @@ public class ScreenSimAud extends JFrame {
         });
 
         //Campo FREQUÊNCIA
-        JLabel jLabel5 = new JLabel("Frequência Emitida (Hz):");
-        jLabel5.setBounds(700, 240, 250, 40);
-        jLabel5.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        jLabel5.setVisible(true);
-        add(jLabel5);
+        JLabel labelFrequencia = new JLabel("Frequência Emitida (Hz):");
+        labelFrequencia.setBounds(700, 240, 250, 40);
+        labelFrequencia.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        labelFrequencia.setVisible(true);
+        add(labelFrequencia);
 
-        JTextField freq = new JTextField();
-        freq.setBounds(700, 280, 200, 40);
-        freq.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-        freq.setForeground(new Color(104, 104, 104));
-        freq.setBackground(new Color(165, 165, 165));
-        freq.setBorder(new EmptyBorder(0, 10, 0, 10));
-        add(freq);
+        JTextField textBoxFrequencia = new JTextField();
+        textBoxFrequencia.setBounds(700, 280, 200, 40);
+        textBoxFrequencia.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+        textBoxFrequencia.setForeground(new Color(104, 104, 104));
+        textBoxFrequencia.setBackground(new Color(165, 165, 165));
+        textBoxFrequencia.setBorder(new EmptyBorder(0, 10, 0, 10));
+        add(textBoxFrequencia);
 
         //Botôes Menu e Gerar áudio
-        JButton jButton4 = new JButton("Menu");
-        jButton4.setBounds(235, 480, 220, 40);
-        jButton4.setFont(new Font("Century Gothic", Font.PLAIN, 23));
-        jButton4.setForeground(new Color(0, 0, 0));
-        jButton4.setBackground(new Color(235, 235, 235));
-        jButton4.setVisible(true);
-        jButton4.setFocusable(false);
-        jButton4.addActionListener(new ActionListener() {
+        JButton botaoMenu = new JButton("Menu");
+        botaoMenu.setBounds(235, 480, 220, 40);
+        botaoMenu.setFont(new Font("Century Gothic", Font.PLAIN, 23));
+        botaoMenu.setForeground(new Color(0, 0, 0));
+        botaoMenu.setBackground(new Color(235, 235, 235));
+        botaoMenu.setVisible(true);
+        botaoMenu.setFocusable(false);
+        botaoMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ScreenMenu.setVisible(true);
+                screenMenu.setVisible(true); // Altere aqui para usar screenMenu
                 dispose();
             }
         });
-        add(jButton4);
+        add(botaoMenu);
 
-        JButton geraAudio = new JButton("Gerar Áudio");
-        geraAudio.setBounds(535, 480, 220, 40);
-        geraAudio.setFont(new Font("Century Gothic", Font.PLAIN, 23));
-        geraAudio.setForeground(new Color(0, 0, 0));
-        geraAudio.setBackground(new Color(235, 235, 235));
-        geraAudio.setVisible(true);
-        geraAudio.setFocusable(false);
-        add(geraAudio);
-        geraAudio.addActionListener(new ActionListener() {
+        JButton botaoGerarAudio = new JButton("Gerar Áudio");
+        botaoGerarAudio.setBounds(535, 480, 220, 40);
+        botaoGerarAudio.setFont(new Font("Century Gothic", Font.PLAIN, 23));
+        botaoGerarAudio.setForeground(new Color(0, 0, 0));
+        botaoGerarAudio.setBackground(new Color(235, 235, 235));
+        botaoGerarAudio.setVisible(true);
+        botaoGerarAudio.setFocusable(false);
+        add(botaoGerarAudio);
+        botaoGerarAudio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    double frqEmi = Double.parseDouble(freq.getText().trim());
-                    double velFont = Double.parseDouble(velFonte.getText().trim());
-                    double distIni = Double.parseDouble(distInicial.getText().trim());
+                    double frqEmi = Double.parseDouble(textBoxFrequencia.getText().trim());
+                    double velFont = Double.parseDouble(textBoxVelocidade.getText().trim());
+                    double distIni = Double.parseDouble(textBoxDistancia.getText().trim());
 
                     if (unidadeDistanciaKm) {
                         distIni *= 1000; // Convertendo Km para metros
                     }
 
                     if (unidadeVelocidadeKmh) {
-                        velFont *= 1000 / 3600.0; // Convertendo Km/h para m/s
+                        velFont = conversaoKms(velFont); // Convertendo Km/h para m/s
                     }
 
                     File wavFile = geraArquivo(frqEmi, velFont, distIni);
-                    new ScreenRepAud(ScreenSimAud.this).setVisible(true);
+                    new ScreenRepAud((ScreenMenu) screenMenu).setVisible(true);
                     openWavFile(wavFile);
                     dispose();
                 } catch (NumberFormatException ex) {
@@ -229,7 +236,7 @@ public class ScreenSimAud extends JFrame {
             }
         });
 
-        add(jLabel8);
+        add(labelFundoCentral);
         setVisible(true);
     }
 
@@ -265,5 +272,10 @@ public class ScreenSimAud extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private double conversaoKms(double velociadadeFonte){
+        BancoDeDados conversao = new BancoDeDados();
+        return conversao.functionConversao((float) velociadadeFonte);
     }
 }

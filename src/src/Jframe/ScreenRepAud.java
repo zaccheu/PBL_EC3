@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ScreenRepAud extends JFrame {
-    private ScreenMenu screenMenu; // Adicione essa linha
+    private ScreenMenu screenMenu;
 
     public ScreenRepAud(ScreenMenu screenMenu) {
-        this.screenMenu = screenMenu; // Adicione essa linha
+        this.screenMenu = screenMenu;
 
         setTitle("Reprodução de Áudio");
         setVisible(true);
@@ -38,7 +38,7 @@ public class ScreenRepAud extends JFrame {
         add(labelFundoCentral);
 
         // Carregar a imagem
-        ImageIcon imagemPlayer = new ImageIcon(getClass().getResource("playerIcon.png"));
+        ImageIcon imagemPlayer = new ImageIcon(getClass().getResource("/Jframe/imagens/playerIcon.png"));
         Image imagemPlayerRedimensionada = imagemPlayer.getImage();
         Image imagemAjustada = imagemPlayerRedimensionada.getScaledInstance(150, 150, Image.SCALE_SMOOTH); // Ajustar o tamanho conforme necessário
         ImageIcon iconeImagem = new ImageIcon(imagemAjustada);
@@ -72,7 +72,7 @@ public class ScreenRepAud extends JFrame {
         botaoMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                screenMenu.setVisible(true); // Altere aqui para usar screenMenu
+                screenMenu.setVisible(true);
                 dispose();
             }
         });
@@ -87,7 +87,7 @@ public class ScreenRepAud extends JFrame {
         botaoGerarNovoAudio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ScreenSimAud(screenMenu).setVisible(true); // Altere aqui para usar screenMenu
+                new ScreenSimAud(screenMenu).setVisible(true);
                 dispose();
             }
         });

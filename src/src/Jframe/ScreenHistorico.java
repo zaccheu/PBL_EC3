@@ -49,7 +49,7 @@ class ScreenHistorico extends JFrame {
         painelTabela.setLayout(new BorderLayout());
 
         // Colunas da tabela
-        String[] colunas = {"Frequência Inicial(Hz)", "Amplitude Senoidal", "Velocidade Relativa(m/s)", "Distância Inicial(m)", "Tempo de Simulação(s)", "Frequência Observada(Hz)"};
+        String[] colunas = {"ID","Frequência Inicial", "Amplitude Senoidal", "Velocidade Relativa", "Distância Inicial", "Tempo de Simulação(s)", "Frequência Observada"};
 
         // Modelo da tabela
         DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
@@ -62,6 +62,7 @@ class ScreenHistorico extends JFrame {
         // Preencher a tabela com os dados das simulações
         for (Simulacao simulacao : simulacoes) {
             Object[] linha = {
+                    simulacao.getSimulacaoID(),
                     simulacao.getFrequenciaInicial(),
                     simulacao.getAmplitudeSenoidal(),
                     simulacao.getVelocidadeRelativa(),
@@ -81,8 +82,20 @@ class ScreenHistorico extends JFrame {
 
         add(painelTabela);
 
+        // Tamanho dos botões
+        int larguraBotao = 180;
+        int alturaBotao = 50;
+
+        // Espaçamento entre os botões
+        int gapBotao = 20;
+
+        // Calcula a posição inicial dos botões para centralizá-los
+        int larguraTotalBotoes = 2 * larguraBotao + gapBotao;
+        int pontoInicial = (getWidth() - larguraTotalBotoes) / 2;
+
+        // Botão Menu
         JButton botaoMenu = new JButton("Menu");
-        botaoMenu.setBounds(410, 480, 180, 50);
+        botaoMenu.setBounds(pontoInicial, 480, larguraBotao, alturaBotao);
         botaoMenu.setFont(new Font("Century Gothic", Font.PLAIN, 25));
         botaoMenu.setForeground(new Color(0, 0, 0));
         botaoMenu.setBackground(new Color(235, 235, 235));
@@ -92,5 +105,24 @@ class ScreenHistorico extends JFrame {
             dispose();
         });
         add(botaoMenu);
+
+        // Novo Excluir
+        JButton botaoNovo = new JButton("Excluir");
+        botaoNovo.setBounds(pontoInicial + larguraBotao + gapBotao, 480, larguraBotao, alturaBotao);
+        botaoNovo.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+        botaoNovo.setForeground(new Color(0, 0, 0));
+        botaoNovo.setBackground(new Color(235, 235, 235));
+        botaoNovo.setFocusable(false);
+        botaoNovo.addActionListener(e -> {
+            // Ação do novo botão
+            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o valor desejado:", "Entrada de Dados", JOptionPane.QUESTION_MESSAGE));
+            excluiSimulacao(id);
+        });
+        add(botaoNovo);
+    }
+
+    private void excluiSimulacao(int idSimulacao){
+        BancoDeDados exclui = new BancoDeDados();
+        exclui.excluiSimulacao(idSimulacao);
     }
 }

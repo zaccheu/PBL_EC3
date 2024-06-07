@@ -1,5 +1,6 @@
 package BancoDados;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -76,6 +77,7 @@ public class BancoDeDados {
 
             while (resultSet.next()) {
                 Simulacao simulacao = new Simulacao(
+                        resultSet.getInt("SimulacaoID"),
                         resultSet.getInt("UsuarioID"),
                         resultSet.getFloat("FrequenciaInicial"),
                         resultSet.getFloat("AmplitudeSenoidal"),
@@ -145,6 +147,22 @@ public class BancoDeDados {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao conectar com o banco de dados.", e);
+        }
+    }
+
+    // Método excluir registro
+    public void excluiSimulacao(int idSimulacao) {
+        String selectSql = "EXEC spDeleteSimulacao @SimulacaoID = ?";
+
+        try (Connection connection = DriverManager.getConnection(CONNECTION_URL);
+             PreparedStatement prepsSelect = connection.prepareStatement(selectSql)) {
+
+            prepsSelect.setInt(1, idSimulacao);
+            prepsSelect.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Simulação excluída com sucesso!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
